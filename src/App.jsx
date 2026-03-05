@@ -9,7 +9,7 @@ import Login from './components/login/Login'
 import Profile from './components/profile/Profile'
 import UserContextProvider from './components/context/UserContext'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
-import PublicRoute from './components/publicRoute/PublicRoute'
+import PublicRoute from './components/PublicRoute/PublicRoute'
 import PostCard from './components/PostCard/PostCard'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import {ReactQueryDevtools} from "@tanstack/react-query-devtools"
