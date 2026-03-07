@@ -93,16 +93,23 @@ export default function Login() {
             <input {...register("email")} type="email" id="email" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-heading bg-transparent rounded-base border-1 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer" placeholder=" " />
             <label htmlFor="email" className="absolute text-sm text-body duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-neutral-primary px-2 peer-focus:px-2 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
               Enter your email</label>
-              {formState.errors.email && <Alert color="danger" title={formState.errors.email.message} />}
+              {/* {formState.errors.email && <Alert color="danger" title={formState.errors.email.message} />} */}
           </div>
+          <div className="relative flex w-[40%] mx-auto my-4">
+              {formState.errors.email && <Alert color="danger" title={formState.errors.email.message} />}
+          </div>  
           {/* --------- password --------- */}
           <div className="relative flex w-[40%] mx-auto my-4">
             <span className="absolute right-3 top-4 cursor-pointer" onClick={() => setShowPassword(!showPassword)}><FaEye /></span>
             <input {...register("password")} type={showPassword ? "text" : "password"} id="password" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-heading bg-transparent rounded-base border-1 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer" placeholder=" " />
             <label htmlFor="password" className="absolute text-sm text-body duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-neutral-primary px-2 peer-focus:px-2 peer-focus:text-fg-brand peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
               Enter your password</label>
-              {formState.errors.password && <Alert color="danger" title={formState.errors.password.message} />}
+              {/* {formState.errors.password && <Alert color="danger" title={formState.errors.password.message} />} */}
           </div>
+          <div className="relative flex w-[40%] mx-auto my-4">
+              {formState.errors.email && <Alert color="danger" title={formState.errors.email.message} />}
+          </div> 
+          {/* --------- end of input fields --------- */}
 
           <div className='flex items-center w-[40%] mx-auto my-4'>
             <Button disabled={isloading==true} type='submit' color="primary" className={`${isloading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`} >  {isloading ? <ImSpinner9 className="animate-spin text-xl" /> : "Login"}  </Button>
