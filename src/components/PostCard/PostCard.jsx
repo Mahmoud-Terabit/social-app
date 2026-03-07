@@ -40,8 +40,20 @@ export default function PostCard(props) {
         </CardBody>
       </Link>
 
-      <CardFooter className='text-white border-t border-gray-700 pt-4'>
-        <SingleComment  comment={post.topComment} />
+      <CardFooter className='flex flex-col text-white border-t border-gray-700 pt-4'>
+        <div className='flex gap-10 mb-4'>
+          <div>
+            <span className='text-white'>Likes</span>
+          </div>
+          <div>
+            <span>{post?.commentsCount}</span>
+            <span className='text-white'>Comments</span>
+          </div>
+          <div>
+            <span className='text-white'>Shares</span>
+          </div>
+        </div>
+        <SingleComment  comment={post?.topComment} />
       </CardFooter>
 
     </Card>

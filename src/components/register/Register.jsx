@@ -63,7 +63,7 @@ export default function Register() {
       if (response.data.success == true) {
         Swal.fire({
           title: 'Success!',
-          text: 'Registration completed successfully',
+          text: response.data.message || 'Registration completed successfully',
           icon: 'success',
           confirmButtonText: 'ok'
         }).then((result) => {

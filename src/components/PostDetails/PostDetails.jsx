@@ -1,8 +1,11 @@
-import { Card, CardHeader, CardBody, Image, } from "@heroui/react";
+import { Card, CardHeader, CardBody, Image,CardFooter } from "@heroui/react";
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import React from 'react'
 import { data, useParams } from 'react-router-dom'
+import Lodingsnipner1 from "../LodingComponents/Lodingsnipner1/Lodingsnipner1";
+import GetAllComponents from "../GetAllComents/GetAllComents";
+import SingleComment from "../SingleComment/SingleComment";
 
 export default function PostDetails() {
 
@@ -30,7 +33,7 @@ console.log(data);
 
 
   if (isLoading) {
-        return (<div className="loader mx-auto mt-[15%]"></div>)
+        return (<Lodingsnipner1 />)
   }
     if(isError){
     return (
@@ -97,6 +100,22 @@ console.log(data);
               width={370}
             />
         </CardBody>
+        <CardFooter className='flex flex-col text-white border-t border-gray-700 pt-4'>
+        <div className='flex gap-10 mb-4'>
+          <div>
+            <span className='text-white'>Likes</span>
+          </div>
+          <div>
+            <span className='text-white'>Comments</span>
+          </div>
+          <div>
+            <span className='text-white'>Shares</span>
+          </div>
+        </div>
+      </CardFooter>
+
+        <GetAllComponents className="" id={data?.id} />
+            
       </Card>
     </>
   )

@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react'
 import PostCard from '../PostCard/PostCard';
 import { is } from 'zod/locales';
 import { useQuery } from '@tanstack/react-query';
+import Lodingsnipner1 from '../LodingComponents/Lodingsnipner1/Lodingsnipner1';
+
 
 export default function Home() {
 
@@ -74,7 +76,7 @@ function getAllPosts() {
   
   if(isLoading){
     return (
-      <div className="loader mx-auto mt-[15%]"></div>
+      <Lodingsnipner1 />
     )
   }
   if(isError){
@@ -91,7 +93,10 @@ function getAllPosts() {
 
     <div className='flex mx-auto w-[50%] items-center justify-center mt-10'>
       <div className='flex flex-wrap gap-4 justify-center'>
-        {data.map((post) => (<PostCard key={post.id} post={post} />))}
+        {/* {data.map((post) => (<PostCard key={post.id} post={post} />))} */}
+        <div className='flex flex-col w-full gap-8'>
+        {data.map((post) => (<div key={post.id} className="flex flex-col gap-5"><PostCard post={post} /></div>))}
+      </div>
       </div>
     </div>
 
