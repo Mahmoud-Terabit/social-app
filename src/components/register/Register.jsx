@@ -26,7 +26,7 @@ export default function Register() {
     email: z.email("invalid email address"),
     password: z.string().regex(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/, "password must be at least 8 characters and contain at least one uppercase letter, one lowercase letter, one number and one special character"),
     rePassword: z.string(),
-    dateOfBirth: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine((date) => {
+    dateOfBirth: z.string().regex(/^\d{4}-\d{2}-\d{2}$/,"date of birth must be in the past").refine((date) => {
       const userDate = new Date(date)
       const nowDate = new Date()
       nowDate.setHours(0, 0, 0, 0)
@@ -164,7 +164,7 @@ export default function Register() {
             </div>
           </div>
           {/* --------- end of input fields --------- */}
-          
+
           <div className='flex items-center w-[40%] mx-auto my-4'>
             <Button disabled={isloading == true} type='submit' color="primary" className={`${isloading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`} >  {isloading ? <ImSpinner9 className="animate-spin text-xl" /> : "Register"}  </Button>
             <span className='mx-3'>have an account? <Link to="/login" className="text-blue-500 hover:underline">Login</Link></span>
