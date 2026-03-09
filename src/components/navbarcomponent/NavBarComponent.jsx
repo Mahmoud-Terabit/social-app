@@ -14,6 +14,8 @@ import {
 import { Link, Links, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import { nav } from 'framer-motion/client';
+import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
 
 
 export const AcmeLogo = () => {
@@ -45,6 +47,9 @@ export default function NavBarComponent() {
 
 
 
+
+
+
   return (
     <>
   
@@ -70,15 +75,16 @@ export default function NavBarComponent() {
               as="button"
               className="transition-transform"
               color="secondary"
-              name="Jason Hughes"
+              name="Craig Richmond"
+              alt='Craig Richmond'
               size="sm"
-              src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+              src="https://img.freepik.com/premium-psd/3d-cartoon-man-smiling-portrait-isolated-transparent-background-png-psd_888962-1570.jpg"
               />
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
             <DropdownItem key="profile" className="h-14 gap-2">
               <p className="font-semibold">Signed in as</p>
-              <p className="font-semibold">zoey@example.com</p>
+              <p className="font-semibold">text@gmail.com</p>
             </DropdownItem>
             <DropdownItem><Link to="/profile">Profile</Link></DropdownItem>
             <DropdownItem onClick={LogOut} key="logout" color="danger">
