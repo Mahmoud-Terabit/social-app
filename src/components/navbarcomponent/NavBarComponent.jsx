@@ -16,6 +16,7 @@ import { UserContext } from '../context/UserContext';
 import { nav } from 'framer-motion/client';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
+import NavButtons from '../NavButtons/NavButtons.';
 
 
 export const AcmeLogo = () => {
@@ -60,9 +61,11 @@ export default function NavBarComponent() {
         <Link to="/" className="font-bold text-inherit">ACME</Link>
       </NavbarBrand>
 
+      <NavbarContent className="flex-1" justify="center">
+        <NavButtons />
+      </NavbarContent>
 
       <NavbarContent as="div" justify="end">
-
       {token ? (<span className="w-4 h-4 rounded-full bg-green-500 inline-block mr-2"></span>) : (<span className="w-4 h-4 rounded-full bg-red-500 inline-block mr-2"></span>)}
       {token == null ?<>
         <Link to="/register" className="text-inherit">Register</Link>

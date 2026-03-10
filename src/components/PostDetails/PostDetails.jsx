@@ -3,9 +3,9 @@ import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import React from 'react'
 import { data, useParams } from 'react-router-dom'
-import Lodingsnipner1 from "../LodingComponents/Lodingsnipner1/Lodingsnipner1";
 import GetAllComponents from "../GetAllComents/GetAllComents";
 import SingleComment from "../SingleComment/SingleComment";
+import Lodingsnipner from "../LodingComponents/Lodingsnipner/Lodingsnipner";
 
 export default function PostDetails() {
 
@@ -33,7 +33,7 @@ console.log(data);
 
 
   if (isLoading) {
-        return (<Lodingsnipner1 />)
+        return (<Lodingsnipner />)
   }
     if(isError){
     return (

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Lodingsnipner1() {
+export default function Lodingsnipner() {
 
     return (
         <>

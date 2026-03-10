@@ -4,7 +4,9 @@ import React, { useEffect, useState } from 'react'
 import PostCard from '../PostCard/PostCard';
 import { is } from 'zod/locales';
 import { useQuery } from '@tanstack/react-query';
-import Lodingsnipner1 from '../LodingComponents/Lodingsnipner1/Lodingsnipner1';
+import Lodingsnipner from '../LodingComponents/Lodingsnipner/Lodingsnipner';
+import CreatPost from '../CreatPost/CreatPost';
+
 
 
 export default function Home() {
@@ -76,7 +78,7 @@ function getAllPosts() {
   
   if(isLoading){
     return (
-      <Lodingsnipner1 />
+      <Lodingsnipner />
     )
   }
   if(isError){
@@ -89,16 +91,28 @@ function getAllPosts() {
 
   return (
     <>
-        <h1 className='text-3xl font-bold text-center mt-10 bg-amber-400'>Welcome to the Home Page</h1>
-
-    <div className='flex mx-auto w-[50%] items-center justify-center mt-10'>
+    {/* <div className='flex mx-auto w-[50%] items-center justify-center mt-10'>
+      <CreatPost/>
       <div className='flex flex-wrap gap-4 justify-center'>
-        {/* {data.map((post) => (<PostCard key={post.id} post={post} />))} */}
+        //hash here {data.map((post) => (<PostCard key={post.id} post={post} />))} 
         <div className='flex flex-col w-full gap-8'>
         {data.map((post) => (<div key={post.id} className="flex flex-col gap-5"><PostCard post={post} /></div>))}
       </div>
       </div>
-    </div>
+    </div> */}
+
+    <div className='flex flex-col mx-auto w-[50%] items-center justify-center mt-10 gap-8'>
+        <CreatPost/>
+        <div className='flex flex-wrap gap-4 justify-center w-full'>
+          <div className='flex flex-col w-full gap-8'>
+            {data.map((post) => (
+              <div key={post.id} className="flex flex-col gap-5">
+                <PostCard post={post} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
 
     </>
   )
