@@ -72,6 +72,7 @@ export default function PostCard(props) {
               {post.sharesCount} shares
             </div>
             <span className="font-medium italic">{post.commentsCount} comments</span>
+            {/*------------ postdetails ------------*/}
             <Link to={`/postdetails/${post.id}`} className="text-blue-600 font-bold hover:underline">View details</Link>
           </div>
         </div>
@@ -103,6 +104,7 @@ export default function PostCard(props) {
                   <div>
                       <span className="text-[12px] font-bold text-gray-500 px-2 uppercase tracking-tight">Top Comment</span>
                   </div>
+                  {/* top Comment*/}
                   <p className="text-[14px] text-gray-700 mt-1"><SingleComment  comment={post?.topComment} /></p>
              </div>
              

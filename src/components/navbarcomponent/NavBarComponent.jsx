@@ -44,6 +44,9 @@ export default function NavBarComponent() {
     setToken(null)
     navigate("/login")
   }
+  function ToProflie() {
+    navigate("/profile")
+  }
 
 
 
@@ -62,7 +65,7 @@ export default function NavBarComponent() {
       </NavbarBrand>
 
       <NavbarContent className="flex-1" justify="center">
-        <NavButtons />
+        {token == null ? <></> : <NavButtons />}
       </NavbarContent>
 
       <NavbarContent as="div" justify="end">
@@ -89,7 +92,10 @@ export default function NavBarComponent() {
               <p className="font-semibold">Signed in as</p>
               <p className="font-semibold">text@gmail.com</p>
             </DropdownItem>
-            <DropdownItem><Link to="/profile">Profile</Link></DropdownItem>
+            {/* <DropdownItem><Link to="/profile">Profile</Link></DropdownItem> */}
+            <DropdownItem onClick={ToProflie}>
+              Profile
+            </DropdownItem>
             <DropdownItem onClick={LogOut} key="logout" color="danger">
               Log Out
             </DropdownItem>

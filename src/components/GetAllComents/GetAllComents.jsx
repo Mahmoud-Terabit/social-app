@@ -3,7 +3,7 @@ import axios from 'axios';
 import React from 'react'
 import SingleComment from '../SingleComment/SingleComment';
 
-export default function GetAllComponents(props) {
+export default function GetAllCommentss(props) {
 
   console.log(props.id);
 
@@ -30,9 +30,9 @@ export default function GetAllComponents(props) {
 
   return (
     <>
-      <h1 className='text-white text-2xl font-bold my-5'>All Comments</h1>
+      {/* <h1 className='text-black text-2xl font-bold my-5'>All Comments</h1> */}
 
-      <div className='my-2'>
+      <div className='my-2 space-y-7'>
         {data?.map((comment)=><SingleComment comment={comment}/>)}
       </div>
     </>
