@@ -47,7 +47,7 @@ export default function NavButtons() {
               key={tab.id}
               to={tab.path}
               className={function({ isActive }) {
-                const baseClasses = "relative flex items-center gap-1.5 px-4 py-2 rounded-full transition-all duration-200 no-underline font-semibold text-[14px]";
+                const baseClasses = "relative flex items-center gap-1.5 px-3 py-2 sm:px-4 rounded-full transition-all duration-200 no-underline font-semibold text-[14px]";
                 const activeClasses = "bg-white shadow-[0_2px_10px_rgba(0,0,0,0.08)] text-[#1d4ed8]";
                 const inactiveClasses = "text-[#4b5563] hover:bg-gray-50";
                 
@@ -58,7 +58,7 @@ export default function NavButtons() {
                 {tab.icon}
               </span>
 
-              <span>{tab.label}</span>
+              <span className="hidden md:block md:inline">{tab.label}</span>
 
               {tab.badge && (
                 <span className="absolute -top-1 left-6 w-4 h-4 bg-[#ef4444] text-white text-[9px] font-extrabold rounded-full flex items-center justify-center border-2 border-white shadow-sm">

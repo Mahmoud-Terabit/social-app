@@ -2,6 +2,8 @@ import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import React from 'react'
 import ProfileInfo from '../ProfileInfo/ProfileInfo'
+import PostCard from '../PostCard/PostCard'
+import { div } from 'framer-motion/client'
 
 export default function profile() {
 
@@ -20,13 +22,41 @@ export default function profile() {
         select:(data)=>data?.data?.data?.user
     })
 
-    console.log(data);
     
+    const GetMyPosts = () => {
+      return axios.get(`https://route-posts.routemisr.com/users/${data?.id}/posts` , {
+        headers: {
+          token: localStorage.getItem("userToken")
+        }
+      })
+    }
+    
+    // console.log('profileeeee',data);
+    
+
+    const {data:userPostss} = useQuery({
+        queryKey:["GetMyPosts"],
+        queryFn: GetMyPosts,
+        select:(userPostss)=>userPostss?.data?.data?.posts
+    })
+    console.log("userPostss",data);
+    
+
 
 
   return (
     <>
-      <ProfileInfo data={data} />
+      <ProfileInfo data={data} userPostss={userPostss} />
+      {userPostss?.map((post)=>{
+        return <>
+        <div className='flex w-full justify-center align-self-center bg-[#f4f6f8] overflow-hidden'  key={post.id}>
+          <div className='flex py-4 sm:w-full md:w-[68%]'>
+            <PostCard post={post} />
+          </div>
+        </div>
+
+        </> 
+      })}
     </>
   )
 }

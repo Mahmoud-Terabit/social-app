@@ -3,7 +3,7 @@ import React from 'react'
 export default function ProfileInfo(props) {
 
 
-    console.log("profileInfo",props.data);
+    // console.log("profileInfo",props.data);
     
 
 
@@ -96,7 +96,7 @@ export default function ProfileInfo(props) {
             <div className="flex flex-col gap-4">
               <div className="border bg-[#eff6ff] border-gray-300 rounded-[14px] p-5 shadow-[0_2px_8px_rgb(0,0,0,0.02)]">
                 <p className="text-[10px] font-bold text-[#355b96] uppercase tracking-widest mb-1">My Posts</p>
-                <p className="text-2xl font-black text-gray-900">1</p>
+                <p className="text-2xl font-black text-gray-900">{props?.userPostss?.length}</p>
               </div>
               <div className="border bg-[#eff6ff] border-gray-300 rounded-[14px] p-5 shadow-[0_2px_8px_rgb(0,0,0,0.02)]">
                 <p className="text-[10px] font-bold text-[#355b96] uppercase tracking-widest mb-1">Saved Posts</p>

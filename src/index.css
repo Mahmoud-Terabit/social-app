@@ -8,6 +8,9 @@
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
 
+body {
+  overflow-x: hidden;
+}
 
 
 
