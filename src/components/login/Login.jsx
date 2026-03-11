@@ -107,7 +107,7 @@ export default function Login() {
               {/* {formState.errors.password && <Alert color="danger" title={formState.errors.password.message} />} */}
           </div>
           <div className="relative flex w-[40%] mx-auto my-4">
-              {formState.errors.email && <Alert color="danger" title={formState.errors.email.message} />}
+              {formState.errors.password && <Alert color="danger" title={formState.errors.password.message} />}
           </div> 
           {/* --------- end of input fields --------- */}
 
