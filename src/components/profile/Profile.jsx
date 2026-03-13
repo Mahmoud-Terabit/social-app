@@ -48,6 +48,13 @@ export default function profile() {
   return (
     <>
       <ProfileInfo data={data} userPostss={userPostss} />
+
+      {userPostss && userPostss.length === 0 && (
+        <div className="bg-[#f4f6f8] text-center text-2xl py-10 font-bold text-blue-500">
+          No posts found
+        </div>
+      )}
+
       {userPostss?.map((post)=>{
         return <>
         <div className='flex w-full justify-center align-self-center bg-[#f4f6f8] overflow-hidden'  key={post.id}>

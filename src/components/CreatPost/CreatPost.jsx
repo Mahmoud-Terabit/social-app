@@ -18,7 +18,7 @@ export default function CreatPost() {
         })
     }
 
-    const { mutate } = useMutation({
+    const { mutate, isPending } = useMutation({
         mutationKey: ["AddPost"],
         mutationFn: AddPost,
         onMutate: () => {
@@ -50,6 +50,8 @@ export default function CreatPost() {
     }
 
     function handleAddPost() {
+        if (isPending) return;
+
         console.log("gi");
         const formData = new FormData()
         if (body) {
@@ -151,8 +153,13 @@ export default function CreatPost() {
                         </div>
 
                         {/* زرار النشر */}
-                        <button onClick={handleAddPost} className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-8 py-2.5 rounded-xl font-bold shadow-md shadow-blue-200 transition-all active:scale-95">
-                            Post
+                        <button
+                            onClick={handleAddPost}
+                            disabled={isPending}
+                            className={`flex items-center gap-2 px-8 py-2.5 rounded-xl font-bold shadow-md shadow-blue-200 transition-all active:scale-95
+                              ${isPending ? "bg-blue-400 cursor-not-allowed opacity-70" : "bg-blue-500 hover:bg-blue-600 text-white"}`}
+                        >
+                            {isPending ? "Posting..." : "Post"}
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                 <line x1="22" y1="2" x2="11" y2="13"></line>
                                 <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>

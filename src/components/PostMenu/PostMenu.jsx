@@ -118,8 +118,7 @@ export const DeleteDocumentIcon = (props) => {
 
 export default function PostMenu({ post }) {
 
-
-  
+  const queryClient = useQueryClient();
 
   const deletingPost = () => {
     return axios.delete(`https://route-posts.routemisr.com/posts/${post?.id}` , {
@@ -130,10 +129,8 @@ export default function PostMenu({ post }) {
   };
 
   function handleDelete() {
-    const queryClient = useQueryClient()
     console.log(post.id);
 
-    
     Swal.fire({
   title: "Are you sure?",
   text: "You won't be able to revert this!",
@@ -144,6 +141,7 @@ export default function PostMenu({ post }) {
   confirmButtonText: "Yes, delete it!"
 }).then((result) => {
   if (result.isConfirmed) {
+    mutate();
     Swal.fire({
       title: "Deleted!",
       text: "Your file has been deleted.",
@@ -157,14 +155,19 @@ export default function PostMenu({ post }) {
   const {mutate} =useMutation({
     mutationKey:["deletePost"],
     mutationFn:deletingPost,
-    onSuccess:()=>{
+    onMutate: () => {
+      const x = toast.loading("Adding Post...")
+      return { x }
+  },
+    onSuccess:(context)=>{
+      toast.dismiss(context.x)
       toast.success("Post deleted successfully");
-      queryClient.invalidateQueries({queryKey:["userPosts"]})
+      queryClient.invalidateQueries({queryKey:["GetMyPosts"]})
       queryClient.invalidateQueries({queryKey:["getAllPosts"]})
     },
     onError:(error)=>{
       toast.error("Failed to delete post. Please try again later. " + error.message);
-    }
+    },
   })
   
   const iconClasses = "text-xl text-default-500 pointer-events-none shrink-0";
