@@ -5,9 +5,11 @@ import ProfileInfo from '../ProfileInfo/ProfileInfo'
 import PostCard from '../PostCard/PostCard'
 import { div } from 'framer-motion/client'
 import GetUserPosts from '../GetUserPosts/GetUserPosts'
+import CreatPost from '../CreatPost/CreatPost'
 
 export default function profile() {
 
+  
 
   function GetMyProfile(){
     return axios.get('https://route-posts.routemisr.com/users/profile-data' , {
@@ -46,26 +48,24 @@ export default function profile() {
 
 
   return (
-    <>
+    <div className="min-h-screen bg-[#f4f6f8]">
       <ProfileInfo data={data} userPostss={userPostss} />
 
       {userPostss && userPostss.length === 0 && (
-        <div className="bg-[#f4f6f8] text-center text-2xl py-10 font-bold text-blue-500">
+        <div className="text-center text-2xl py-10 font-bold text-blue-500">
           No posts found
         </div>
       )}
 
-      {userPostss?.map((post)=>{
-        return <>
-        <div className='flex w-full justify-center align-self-center bg-[#f4f6f8] overflow-hidden'  key={post.id}>
-          <div className='flex py-4 sm:w-full md:w-[68%]'>
-            {/* <PostCard post={post} /> */}
-            <GetUserPosts post={post} />
-          </div>
+      {userPostss && userPostss.length > 0 && (
+        <div className="flex flex-col mx-auto sm:w-full md:w-[70%] px-4 md:px-0 items-center gap-6 pt-2 pb-10">
+          {userPostss.map((post) => (
+            <div key={post.id} className="w-full">
+              <GetUserPosts post={post} />
+            </div>
+          ))}
         </div>
-
-        </> 
-      })}
-    </>
+      )}
+    </div>
   )
 }

@@ -34,6 +34,21 @@ export const AcmeLogo = () => {
 
 export default function NavBarComponent() {
 
+
+  function GetMyProfile(){
+    return axios.get('https://route-posts.routemisr.com/users/profile-data' , {
+      headers: {
+        token: localStorage.getItem("userToken")
+      }
+    })
+  }
+
+  const { data: userData } = useQuery({
+    queryKey: ["GetMyProfile"],
+    queryFn: GetMyProfile,
+    select: (userData) => userData?.data?.data?.user
+  })
+
   let navigate = useNavigate()
 
   let {token, setToken} = useContext(UserContext)
@@ -90,7 +105,7 @@ export default function NavBarComponent() {
           <DropdownMenu aria-label="Profile Actions" variant="flat">
             <DropdownItem key="profile" className="h-14 gap-2">
               <p className="font-semibold">Signed in as</p>
-              <p className="font-semibold">text@gmail.com</p>
+              <p className="font-semibold">{userData?.email}</p>
             </DropdownItem>
             {/* <DropdownItem><Link to="/profile">Profile</Link></DropdownItem> */}
             <DropdownItem onClick={ToProflie}>

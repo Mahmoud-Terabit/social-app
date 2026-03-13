@@ -175,10 +175,19 @@ export default function PostMenu({ post }) {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button variant="bordered" className="text-4xl flex justify-content-center align-items-center"><p className="">...</p></Button>
+        {/* <Button variant="bordered" className="text-4xl flex justify-content-center align-items-center hover:bg-gray-100">
+          <p className="mb-5">...</p></Button> */}
+        <Button
+          isIconOnly
+          variant="light"
+          className="min-w-10 h-10 w-10 p-0 flex items-center justify-center rounded-full text-gray-600 hover:bg-gray-100"
+          aria-label="Post menu"
+        >
+          <span className="inline-flex items-center justify-center leading-none text-[30px] font-bold select-none mb-2">⋯</span>
+        </Button>
       </DropdownTrigger>
       <DropdownMenu aria-label="Dropdown menu with description" variant="faded">
-        <DropdownItem
+        {/* <DropdownItem
           key="new"
           description="Create a new file"
           shortcut="⌘N"
@@ -193,7 +202,7 @@ export default function PostMenu({ post }) {
           startContent={<CopyDocumentIcon className={iconClasses} />}
         >
           Copy link
-        </DropdownItem>
+        </DropdownItem> */}
         <DropdownItem
           key="edit"
           showDivider

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 {/*مكتبة من ريأكت للايكونز for icons from react (lucide-react) */ }
 import { Globe, Image, Smile, Send } from 'lucide-react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
@@ -10,6 +10,20 @@ export default function CreatPost() {
     const [image, setImage] = useState('')
     const [imageSrc, setImageSrc] = useState('')
     const queryClient = useQueryClient()
+
+    function GetMyProfile(){
+        return axios.get('https://route-posts.routemisr.com/users/profile-data' , {
+          headers: {
+            token: localStorage.getItem("userToken")
+          }
+        })
+      }
+
+    const { data: userData } = useQuery({
+        queryKey:["GetMyProfile"],
+        queryFn: GetMyProfile,
+        select:(userData)=>userData?.data?.data?.user
+    })
 
     function AddPost(formData) {
         return axios.post('https://route-posts.routemisr.com/posts', formData, {headers: {
@@ -89,7 +103,7 @@ export default function CreatPost() {
                             />
                         </div>
                         <div>
-                            <h3 className="font-bold text-gray-900 text-lg leading-tight">Ainsley Padilla</h3>
+                            <h3 className="font-bold text-gray-900 text-lg leading-tight">{userData?.name}</h3>
                             <button className="flex items-center gap-1 mt-1 px-2 py-0.5 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors">
                                 <Globe size={14} className="text-gray-600" />
                                 <span className="text-sm font-medium text-gray-600">Public</span>
@@ -115,8 +129,8 @@ export default function CreatPost() {
 
                     <hr className="mx-4 border-gray-100" />
 
-                    <div className="p-4 flex items-center justify-between">
-                        <div className="flex gap-4">
+                    <div className="p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                        <div className="flex flex-wrap gap-4">
 
                             {/* زرار الصور كـ Input File */}
                             <label className="flex items-center gap-2 text-gray-600 hover:bg-gray-100 px-3 py-2 rounded-lg transition-all cursor-pointer">
@@ -146,7 +160,7 @@ export default function CreatPost() {
                                 <input
                                     type="text"
                                     placeholder="Feeling/activity"
-                                    className="bg-transparent border-none outline-none font-medium w-28 placeholder-gray-600 text-sm focus:ring-0 p-0"
+                                    className="bg-transparent border-none outline-none font-medium w-20 sm:w-28 placeholder-gray-600 text-sm focus:ring-0 p-0"
                                 />
                             </div>
 
@@ -156,7 +170,7 @@ export default function CreatPost() {
                         <button
                             onClick={handleAddPost}
                             disabled={isPending}
-                            className={`flex items-center gap-2 px-8 py-2.5 rounded-xl font-bold shadow-md shadow-blue-200 transition-all active:scale-95
+                            className={`flex items-center gap-2 px-4 sm:px-8 py-2.5 rounded-xl font-bold shadow-md shadow-blue-200 transition-all active:scale-95 text-sm sm:text-base
                               ${isPending ? "bg-blue-400 cursor-not-allowed opacity-70" : "bg-blue-500 hover:bg-blue-600 text-white"}`}
                         >
                             {isPending ? "Posting..." : "Post"}

@@ -101,7 +101,7 @@ function getAllPosts() {
       </div>
     </div> */}
 
-    <div className='flex flex-col mx-auto md:w-[50%]  items-center justify-center mt-10 gap-8'>
+    <div className='flex flex-col mx-auto sm:w-[50%] md:w-[50%] px-4 md:px-0 items-center justify-center mt-10 gap-8'>
         <CreatPost/>
         <div className='flex flex-wrap gap-4 justify-center w-full'>
           <div className='flex flex-col w-full gap-8'>

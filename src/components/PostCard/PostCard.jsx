@@ -49,9 +49,9 @@ export default function PostCard(props) {
         <div className="flex flex-col gap-4 px-4 pb-4 items-center justify-center">
           <h4 className="text-black font-bold my-5">{post?.body}</h4>
           <Image alt="Card background"
-            className="object-cover rounded-xl"
+            className="object-cover rounded-xl w-full max-w-[900px]"
             src={`${post?.image}`}
-            width={370}
+            width={900}
           />
         </div>
 
