@@ -2,6 +2,7 @@ import React from 'react'
 import {Card, CardHeader, CardBody, Image, CardFooter} from "@heroui/react";
 import SingleComment from '../SingleComment/SingleComment';
 import { Link } from 'react-router-dom';
+import PostMenu from '../postMenu/PostMenu';
 
 export default function PostCard(props) {
   const post = props.post;
@@ -22,9 +23,9 @@ export default function PostCard(props) {
               className="w-12 h-12 rounded-full object-cover"
             />
             <div>
-              <h3 className="font-bold text-[#050505] text-[17px]">{post.user.name}</h3>
+              <h3 className="font-bold text-[#050505] text-[17px]">{post?.user?.name}</h3>
               <div className="flex items-center gap-1 text-[14px] text-gray-500">
-                <span>{new Date(post.createdAt).toLocaleDateString("en-US", {
+                <span>{new Date(post?.createdAt).toLocaleDateString("en-US", {
                   month: "long",
                   day: "numeric",
                   year: "numeric"
@@ -39,19 +40,17 @@ export default function PostCard(props) {
             </div>
           </div>
           {/* Menu Dots */}
-          <button className="text-gray-500 hover:bg-gray-100 p-1 rounded-full">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-              <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
-            </svg>
-          </button>
+          <div className=''>
+                <PostMenu post={post}/>
+          </div>
         </div>
 
         {/* 2. Content Section */}
         <div className="flex flex-col gap-4 px-4 pb-4 items-center justify-center">
-          <h4 className="text-black font-bold my-5">{post.body}</h4>
+          <h4 className="text-black font-bold my-5">{post?.body}</h4>
           <Image alt="Card background"
             className="object-cover rounded-xl"
-            src={`${post.image}`}
+            src={`${post?.image}`}
             width={370}
           />
         </div>
@@ -64,16 +63,16 @@ export default function PostCard(props) {
                 <path d="M20 13h-4V5a2 2 0 00-2-2H9a2 2 0 00-2 2v8H3v8h17v-8z" />
               </svg>
             </div>
-            <span>{post.likesCount}</span>
+            <span>{post?.likesCount}</span>
           </div>
           <div className="flex gap-3">
             <div className="flex items-center gap-1 font-medium italic">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92z"/></svg>
-              {post.sharesCount} shares
+              {post?.sharesCount} shares
             </div>
-            <span className="font-medium italic">{post.commentsCount} comments</span>
+            <span className="font-medium italic">{post?.commentsCount} comments</span>
             {/*------------ postdetails ------------*/}
-            <Link to={`/postdetails/${post.id}`} className="text-blue-600 font-bold hover:underline">View details</Link>
+            <Link to={`/postdetails/${post?.id}`} className="text-blue-600 font-bold hover:underline">View details</Link>
           </div>
         </div>
 

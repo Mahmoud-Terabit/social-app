@@ -4,6 +4,7 @@ import React from 'react'
 import ProfileInfo from '../ProfileInfo/ProfileInfo'
 import PostCard from '../PostCard/PostCard'
 import { div } from 'framer-motion/client'
+import GetUserPosts from '../GetUserPosts/GetUserPosts'
 
 export default function profile() {
 
@@ -39,7 +40,7 @@ export default function profile() {
         queryFn: GetMyPosts,
         select:(userPostss)=>userPostss?.data?.data?.posts
     })
-    console.log("userPostss",data);
+    // console.log("userPostss",data);
     
 
 
@@ -51,7 +52,8 @@ export default function profile() {
         return <>
         <div className='flex w-full justify-center align-self-center bg-[#f4f6f8] overflow-hidden'  key={post.id}>
           <div className='flex py-4 sm:w-full md:w-[68%]'>
-            <PostCard post={post} />
+            {/* <PostCard post={post} /> */}
+            <GetUserPosts post={post} />
           </div>
         </div>
 
