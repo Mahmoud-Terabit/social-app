@@ -2,7 +2,7 @@ import React from 'react'
 import {Card, CardHeader, CardBody, Image, CardFooter} from "@heroui/react";
 import SingleComment from '../SingleComment/SingleComment';
 import { Link } from 'react-router-dom';
-import PostMenu from '../postMenu/PostMenu';
+import PostMenu from '../PostMenu/PostMenu';
 
 export default function PostCard(props) {
   const post = props.post;

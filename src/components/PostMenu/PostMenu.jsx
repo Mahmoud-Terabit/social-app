@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { success } from "zod";
 
+
 export const AddNoteIcon = (props) => {
   return (
     <svg
