@@ -1,65 +1,15 @@
-import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button, cn, ButtonGroup} from "@heroui/react";
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button, cn, ButtonGroup } from "@heroui/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { q } from "framer-motion/client";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
-import { success } from "zod";
+import UpdatePost from '../updatePost/updatePost';
 
 
-export const AddNoteIcon = (props) => {
-  return (
-    <svg
-      aria-hidden="true"
-      fill="none"
-      focusable="false"
-      height="1em"
-      role="presentation"
-      viewBox="0 0 24 24"
-      width="1em"
-      {...props}
-    >
-      <path
-        d="M7.37 22h9.25a4.87 4.87 0 0 0 4.87-4.87V8.37a4.87 4.87 0 0 0-4.87-4.87H7.37A4.87 4.87 0 0 0 2.5 8.37v8.75c0 2.7 2.18 4.88 4.87 4.88Z"
-        fill="currentColor"
-        opacity={0.4}
-      />
-      <path
-        d="M8.29 6.29c-.42 0-.75-.34-.75-.75V2.75a.749.749 0 1 1 1.5 0v2.78c0 .42-.33.76-.75.76ZM15.71 6.29c-.42 0-.75-.34-.75-.75V2.75a.749.749 0 1 1 1.5 0v2.78c0 .42-.33.76-.75.76ZM12 14.75h-1.69V13c0-.41-.34-.75-.75-.75s-.75.34-.75.75v1.75H7c-.41 0-.75.34-.75.75s.34.75.75.75h1.81V18c0 .41.34.75.75.75s.75-.34.75-.75v-1.75H12c.41 0 .75-.34.75-.75s-.34-.75-.75-.75Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-};
+{/* ---------------- delete post --------------- */}
 
-export const CopyDocumentIcon = (props) => {
-  return (
-    <svg
-      aria-hidden="true"
-      fill="none"
-      focusable="false"
-      height="1em"
-      role="presentation"
-      viewBox="0 0 24 24"
-      width="1em"
-      {...props}
-    >
-      <path
-        d="M15.5 13.15h-2.17c-1.78 0-3.23-1.44-3.23-3.23V7.75c0-.41-.33-.75-.75-.75H6.18C3.87 7 2 8.5 2 11.18v6.64C2 20.5 3.87 22 6.18 22h5.89c2.31 0 4.18-1.5 4.18-4.18V13.9c0-.42-.34-.75-.75-.75Z"
-        fill="currentColor"
-        opacity={0.4}
-      />
-      <path
-        d="M17.82 2H11.93C9.67 2 7.84 3.44 7.76 6.01c.06 0 .11-.01.17-.01h5.89C16.13 6 18 7.5 18 10.18V16.83c0 .06-.01.11-.01.16 2.23-.07 4.01-1.55 4.01-4.16V6.18C22 3.5 20.13 2 17.82 2Z"
-        fill="currentColor"
-      />
-      <path
-        d="M11.98 7.15c-.31-.31-.84-.1-.84.33v2.62c0 1.1.93 2 2.07 2 .71.01 1.7.01 2.55.01.43 0 .65-.5.35-.8-1.09-1.09-3.03-3.04-4.13-4.16Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-};
 
 export const EditDocumentIcon = (props) => {
   return (
@@ -121,59 +71,68 @@ export default function PostMenu({ post }) {
 
   const queryClient = useQueryClient();
 
+
+  const [updateClick, setUpdateClick] = useState(false)
+  
+
   const deletingPost = () => {
-    return axios.delete(`https://route-posts.routemisr.com/posts/${post?.id}` , {
+    return axios.delete(`https://route-posts.routemisr.com/posts/${post?.id}`, {
       headers: {
         token: localStorage.getItem("userToken")
       }
     });
   };
 
+
+
   function handleDelete() {
-    console.log(post.id);
+    console.log("Deleting post:", post.id);
 
     Swal.fire({
-  title: "Are you sure?",
-  text: "You won't be able to revert this!",
-  icon: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#3085d6",
-  cancelButtonColor: "#d33",
-  confirmButtonText: "Yes, delete it!"
-}).then((result) => {
-  if (result.isConfirmed) {
-    mutate();
-    Swal.fire({
-      title: "Deleted!",
-      text: "Your file has been deleted.",
-      icon: "success"
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        mutate();
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your post has been deleted.",
+          icon: "success"
+        });
+      }
     });
   }
-});
-  }
 
 
-  const {mutate} =useMutation({
-    mutationKey:["deletePost"],
-    mutationFn:deletingPost,
+  
+
+  const { mutate } = useMutation({
+    mutationKey: ["deletePost"],
+    mutationFn: deletingPost,
     onMutate: () => {
-      const x = toast.loading("Adding Post...")
+      const x = toast.loading("Deleting Post...")
       return { x }
-  },
-    onSuccess:(context)=>{
+    },
+    onSuccess: (context) => {
       toast.dismiss(context.x)
       toast.success("Post deleted successfully");
-      queryClient.invalidateQueries({queryKey:["GetMyPosts"]})
-      queryClient.invalidateQueries({queryKey:["getAllPosts"]})
+      queryClient.invalidateQueries({ queryKey: ["GetMyPosts"] })
+      queryClient.invalidateQueries({ queryKey: ["getAllPosts"] })
     },
-    onError:(error)=>{
+    onError: (error) => {
       toast.error("Failed to delete post. Please try again later. " + error.message);
     },
   })
-  
+
   const iconClasses = "text-xl text-default-500 pointer-events-none shrink-0";
 
   return (
+    <>
     <Dropdown>
       <DropdownTrigger>
         {/* <Button variant="bordered" className="text-4xl flex justify-content-center align-items-center hover:bg-gray-100">
@@ -205,13 +164,14 @@ export default function PostMenu({ post }) {
           Copy link
         </DropdownItem> */}
         <DropdownItem
+        onPress={()=>setUpdateClick(true)}
           key="edit"
           showDivider
-          description="Allows you to edit the file"
+          description="Allows you to edit the post"
           shortcut="⌘⇧E"
           startContent={<EditDocumentIcon className={iconClasses} />}
         >
-          Edit file
+          Edit post
         </DropdownItem>
 
         <DropdownItem
@@ -221,14 +181,17 @@ export default function PostMenu({ post }) {
           key="delete"
           className="text-danger"
           color="danger"
-          description="Permanently delete the file"
+          description="Permanently delete the post"
           shortcut="⌘⇧D"
           startContent={<DeleteDocumentIcon className={cn(iconClasses, "text-danger")} />}
         >
           {/* <button onClick={(e) => { e.stopPropagation(),e.preventDefault(),console.log('delee',post.id) }}>Delete file</button> */}
-          Delete file
+          Delete post
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>
+
+    {updateClick && <UpdatePost post={post} setUpdateClick={setUpdateClick}/>}
+    </>
   );
 }

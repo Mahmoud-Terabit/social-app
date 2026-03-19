@@ -33,7 +33,9 @@ export default function GetAllCommentss(props) {
       {/* <h1 className='text-black text-2xl font-bold my-5'>All Comments</h1> */}
 
       <div className='my-2 space-y-7'>
-        {data?.map((comment)=><SingleComment comment={comment}/>)}
+        {/*{data?.map((comment)=><SingleComment comment={comment}/>)} */}
+        {/* postId comment  مبعوت للسنجل كومينت منو انا ببعت للتحديث عشان فى التحديث ياخد فى اللينك الكومينت و البوست جاهزين*/}
+        {data?.map((comment)=><SingleComment comment={comment} postId={props.id} />)}  
       </div>
     </>
   )

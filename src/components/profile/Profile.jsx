@@ -45,8 +45,6 @@ export default function profile() {
     // console.log("userPostss",data);
     
 
-
-
   return (
     <div className="min-h-screen bg-[#f4f6f8]">
       <ProfileInfo data={data} userPostss={userPostss} />
